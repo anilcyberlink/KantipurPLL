@@ -35,15 +35,16 @@
             @endif
             @if (checkAuth(2))
                 <li>
-                    @if (Request::segment(2) == 'services' ||
-                            Request::segment(2) == 'about-us' ||
+                    @if (Request::segment(2) == 'product' ||
+                            Request::segment(2) == 'about' ||
+                            Request::segment(3) == 'about' ||
                             Request::segment(2) == 'blog' ||
                             Request::segment(2) == 'gallery' ||
                             Request::segment(2) == 'contact' ||
                             Request::segment(2) == 'partners' ||
                             Request::segment(2) == 'career' ||
                             Request::segment(3) == 'career' ||
-                            Request::segment(2) == 'certification' ||
+                            Request::segment(2) == 'mission' ||
                             Request::segment(2) == 'posttype')
                         <a class="accordion-toggle menu-open" href="avoid:javascript;">
                         @else
@@ -75,7 +76,7 @@
                         @if ($posttype)
                             @foreach ($posttype as $row)
                                 <li
-                                    class="{{ Request::segment(2) == $row->uri || Request::segment(3) == $row->id || Request::segment(3) == $row->uri ? 'active' : '' }}">
+                                    class="{{ Request::segment(2) == $row->uri || (Request::segment(2) == 'posttype' && Request::segment(3) == $row->id) || Request::segment(3) == $row->uri ? 'active' : '' }}">
                                     @if (has_posts($row->id))
                                         <a href="{{ url('admin/' . $row->uri) }}">
                                         @else

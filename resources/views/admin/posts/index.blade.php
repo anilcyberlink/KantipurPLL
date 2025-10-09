@@ -66,7 +66,7 @@
                 </td>
                 
               <td>
-                @if (Request::segment(2)== 'career')
+                @if (Request::segment(2)== 'career' || $row->id == 17 )
                   <a href="{{url('admin/associated/'.Request::segment(2).'/'.$row->id)}}" title="Associated posts">
                   <i class="fa fa-list-ol"></i>
                   </a>

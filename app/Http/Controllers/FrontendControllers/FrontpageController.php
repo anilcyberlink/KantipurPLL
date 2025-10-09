@@ -59,7 +59,7 @@ class FrontpageController extends Controller
       $data['template'] = $data['template'];
     }
     if($data){
-      $posts = PostModel::where('post_type',$data->id)->orderBy('post_order','asc')->paginate(6); 
+      $posts = PostModel::where('post_type',$data->id)->with('associatePosts')->orderBy('post_order','asc')->paginate(6); 
     }
     $documents = PostDocModel::where('post_id', $data['id'])->orderBy('ordering','desc')->get();
     // dd($data,$posts,$setting);
