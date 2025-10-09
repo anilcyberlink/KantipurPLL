@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kantipur PLL</title>
     <link rel="stylesheet" href="{{ asset('themes-assets/css/uikit.css')}}" />
-    <script src="{{ asset('themes-assets/js/uikit.js')}}"></script>
+    <script src="{{ asset('themes-assets/js/uikit.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('themes-assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('themes-assets/css/global.css')}}">
     <script src="https://kit.fontawesome.com/7254a5967d.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -25,28 +24,28 @@
             <div class="uk-container uk-container-large shadow-lg">
                 <nav class="uk-navbar d-flex uk-flex-middle" uk-navbar="mode: hover; delay-show: 300; delay-hide: 500">
                     <div class="uk-navbar-left">
-                        <a class="uk-navbar-item uk-logo " href="index.php">
+                        <a class="uk-navbar-item uk-logo " href="{{ url('/') }}">
                             <img src="{{ asset('themes-assets/img/logo.png') }}" alt="" width="120" class="uk-logo-white">
                         </a>
                     </div>
                     <div class="uk-navbar-center ">
                         <ul class="uk-navbar-nav uk-position-relative">
-                            <li><a href="about.php">About</a></li>
-                            <li><a href="mission.php">Mission</a></li>
-                            <li>
-                                <a href="#">Product <span uk-navbar-parent-icon></span></a>
-                                <div class="uk-navbar-dropdown">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="product-list.php">Feed Supplement</a></li>
-                                        <li><a href="product-list.php">Allopathic</a></li>
-                                        <li><a href="product-list.php">Marketing Division</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="blog.php">News / Blogs</a></li>
-                            <li><a href="career.php">Career</a></li>
-                            <li><a href="contact.php">Contact</a></li>
-
+							@foreach ($navigations as $row)
+								@if ($row->id != '2')
+                            		<li><a href="{{ url('page/' . posttype_url($row->uri)) }}">{{ $row->post_type }}</a></li>
+								@else
+									<li>
+										<a>{{ $row->post_type }}<span uk-navbar-parent-icon></span></a>
+										<div class="uk-navbar-dropdown">
+											<ul class="uk-nav uk-navbar-dropdown-nav">
+												@foreach ($services as $service)
+													<li><a href="{{url(geturl($service['uri'],$service['page_key']))}}">{{$service->post_title}} </a></li>
+												@endforeach
+											</ul>
+										</div>
+									</li>
+								@endif
+							@endforeach
                         </ul>
                     </div>
                     <div class="uk-navbar-right">
@@ -69,7 +68,7 @@
                 <div class="uk-container uk-container-expand">
                     <nav class="uk-navbar">
                         <div class="uk-navbar-left">
-                            <a href="index.php" class=" uk-navbar-item">
+                            <a href="{{ url('/') }}" class=" uk-navbar-item">
                                 <img alt="" loading="eager" src="{{ asset('themes-assets/img/logo.png') }}" width="120">
                             </a>
                         </div>
@@ -80,7 +79,7 @@
                                 <div class="uk-offcanvas-bar uk-width-1-1 uk-padding-remove uk-bg-light">
                                     <div class="uk-offcanvas-header uk-flex uk-flex-between uk-flex-middle">
                                         <div>
-                                            <a class="uk-navbar-item uk-logo " href="index.php">
+                                            <a class="uk-navbar-item uk-logo " href="{{ url('/') }}">
                                                 <img src="{{ asset('themes-assets/img/logo.png') }}" alt="" width="120" class="uk-logo-white">
                                             </a>
                                         </div>
@@ -90,20 +89,21 @@
                                     </div>
                                     <div class="uk-offcanvas-body uk-padding-small">
                                         <ul class="uk-offcanvas-nav uk-position-relative" uk-nav="multiple: true;">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="about.php">About</a></li>
-                                            <li><a href="mission.php">Mission</a></li>
-                                            <li class="uk-parent">
-                                                <a href="#">Product<span uk-nav-parent-icon></span></a>
-                                                <ul class=" uk-padding-remove">
-                                                    <li><a href="product-list.php">Allopathic</a></li>
-                                                    <li><a href="product-list.php">Allopathic</a></li>
-                                                    <li><a href="product-list.php">Marketing Division</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="blog.php">News / Blogs</a></li>
-                                            <li><a href="career.php">Career</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
+                                            <li><a href="{{ url('/') }}">Home</a></li>
+							                @foreach ($navigations as $row)
+                                                @if ($row->id != '2')
+                            		                <li><a href="{{ url('page/' . posttype_url($row->uri)) }}">{{ $row->post_type }}</a></li>
+                                                @else
+                                                    <li class="uk-parent">
+                                                        <a>Product<span uk-nav-parent-icon></span></a>
+                                                        <ul class=" uk-padding-remove">
+												            @foreach ($services as $service)
+                                                                <li><a href="{{url(geturl($service['uri'],$service['page_key']))}}"> {{$service->post_title}} </a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="uk-offcanvas-footer uk-padding-small uk-padding-remove-top">
