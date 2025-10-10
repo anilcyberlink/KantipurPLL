@@ -37,6 +37,6 @@ class CareerMail extends Mailable
         return $this->view('emails.career-mail', [
             'data' => $data,
             'request' => $request
-        ])->subject('Inquiry')->to($email);
+        ])->subject('Inquiry');
     }
 }
