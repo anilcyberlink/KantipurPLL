@@ -178,7 +178,7 @@
                 <tr>
                     <td class="email-masthead">
 
-                        <img src="{{ asset('themes-assets/img/logo.jpg') }}" style="max-height: 40px" alt="{{$data->site_name}}">
+                        <img src="{{ asset('themes-assets/img/logo.png') }}" style="max-height: 40px" alt="{{$data->site_name}}">
                         <a href="{{url('/')}}" class="email-masthead_name">{{$data->site_name}}</a>
                     </td>
                 </tr>
@@ -194,7 +194,7 @@
                                     <table>
                                         <tr>
                                           <td><strong>Full Name </strong></td>
-                                          <td>{{ $request->first_name }} {{ $request->last_name }}</td> 
+                                          <td>{{ $request->name }}</td> 
                                         </tr>
                                         <tr>
                                           <td><strong>Email Address</strong></td>
@@ -202,7 +202,7 @@
                                         </tr>
                                         <tr>
                                           <td><strong>Phone Number </strong></td>
-                                          <td>{{ $request->contact }}</td>
+                                          <td>{{ $request->phone }}</td>
                                         </tr>  
                                       </table>
                                     Your registered email-id is {{$request->email}} , We will contact you soon.

@@ -85,7 +85,7 @@ class FrontpageController extends Controller
     $data_child = PostModel::where('post_parent', $data['id'])->orderBy('post_order','desc')->paginate(12);    
     $associated_posts = AssociatedPostModel::where('post_id', $data['id'])->get();   
     $documents = PostDocModel::where('post_id', $data['id'])->orderBy('ordering','desc')->get();
-    $related_posts =PostModel::where('post_type',$data->post_type)->orderBy('id','asc')->paginate(6);
+    $related_posts =PostModel::where('post_type',$data->post_type)->where('id', '!=', $data->id)->orderBy('id','asc')->paginate(6);
     $multiphotos = $data->images()->orderBy('created_at','desc')->paginate(6);
     // dd( $data,$associated_posts);
 
@@ -219,37 +219,40 @@ public function sendmail_resume(Request $request)
     $result = $this->getCaptcha($g_recaptcha_response);
 
     if ($result->success == true) {
+      // dd($request->all());
         $validated = $request->validate([
-            'first_name'     => 'required|string|max:255',
-            'last_name'      => 'required|string|max:255',
-            'email'          => 'required|email|max:255',
-            'contact'        => 'required|string|max:20',
-            'cv'             => 'required|file|mimes:pdf,doc,docx|max:2048',
-            'cover_letter'   => 'required|file|mimes:pdf,doc,docx|max:2048',
-            'agree_terms'    => 'accepted',
+          'position' => 'required|exists:posts,id',
+          'name' => 'required|string|max:255',
+          'phone' => 'required|string|max:20',
+          'email' => 'required|email|max:255',
+          'experience' => 'required|numeric|min:0',
+          'ctc' => 'required|string',
+          'organization' => 'required|string|max:255',
+          'cv' => 'required|mimes:doc,docx,pdf|max:2048',
+          'cover' => 'required|mimes:doc,docx,pdf|max:2048'
         ]);
 
         $cvFile = $request->file('cv');
         $cvName = time() . '-' . $cvFile->getClientOriginalName();
         $cvFile->move(public_path('uploads/cv'), $cvName);
 
-        $coverFile = $request->file('cover_letter');
+        $coverFile = $request->file('cover');
         $coverName = time() . '-' . $coverFile->getClientOriginalName();
         $coverFile->move(public_path('uploads/coverletter'), $coverName);
         $create = CareerModel::create([
-          'fname'    => $request->first_name,
-          'lname'    => $request->last_name,
-          'email'    => $request->email,
-          'number'   => $request->contact,
-          'message'  => $request->message,
-          'cv'       => $cvName,
-          'cover'    => $coverName,
-          'subject'  => $request->type,
-          'country'  => $request->country,
-          'position' => $request->position,
-      ]);
-        return new CareerMail();
-        $name = $request->first_name;
+            'fname'    => $request->name,
+            'lname'    => $request->last_name,
+            'email'    => $request->email,
+            'number'   => $request->phone,
+            'message'  => $request->experience,
+            'cv'       => $cvName,
+            'cover'    => $coverName,
+            'subject'  => $request->ctc,
+            'country'  => $request->organization,
+            'position' => $request->position,
+        ]);
+        // return new CareerMail();
+        $name = $request->name;
         $message = "<p>Thanks for applying. One of our team will be in touch with you soon.</p>";
 
         return view('themes.default.inquiry-success', compact('message', 'name'));

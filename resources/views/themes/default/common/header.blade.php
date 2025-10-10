@@ -10,9 +10,19 @@
     <link rel="stylesheet" href="{{ asset('themes-assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('themes-assets/css/global.css')}}">
     <script src="https://kit.fontawesome.com/7254a5967d.js" crossorigin="anonymous"></script>
+
+     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        .toast {
+            opacity: .9 !important;
+        }
+    </style>
 </head>
 
 <body>
+	@include('themes.default.common.response')
     <div id="preloader" class="preloader uk-flex uk-flex-middle uk-flex-center">
         <div class="loader"> <img src="{{ asset('themes-assets/img/logo.png') }}" alt="" width="200" class="uk-logo-white"> </div>
     </div>

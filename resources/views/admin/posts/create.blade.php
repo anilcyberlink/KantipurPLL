@@ -38,17 +38,17 @@
             </div>
           </div>      
         @endif
-      <?php /*?>
-       
-        <div class="form-group">
-          <label for="inputStandard" class="col-lg-2 control-label">UID</label>
-          <div class="col-lg-9">
-            <div class="bs-component">
-              <input type="text" id="" name="uid" class="form-control" />
+        @if (Request::segment(2) == 'blog')
+          <div class="form-group">
+            <label for="inputStandard" class="col-lg-2 control-label">Author</label>
+            <div class="col-lg-9">
+              <div class="bs-component">
+                <input type="text" id="" name="associated_title" class="form-control" />
+              </div>
             </div>
           </div>
-        </div>
-        
+        @endif
+      <?php /*?>
         <div class="form-group">
               <label class="col-lg-2 control-label" for="textArea3"> Associated Title  </label>
               <div class="col-lg-9">
