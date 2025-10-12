@@ -33,11 +33,10 @@ class ContactMail extends Mailable
     public function build(Request $request)
     {
         $data = SettingModel::where('id',1)->first();
-        // dd($request->all(), $data);
         $email = $request->email;
         return $this->view('emails.contact-mail', [
             'data' => $data,
             'request' => $request
-        ])->subject('Inquiry')->to('anilcyberlink@gmail.com');
+        ])->subject('Inquiry');
     }
 }

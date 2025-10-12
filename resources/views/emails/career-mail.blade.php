@@ -189,7 +189,7 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <h1>Thanks for applying</h1>
+                                    <h1>Thank you for applying.</h1>
                                     <br/>
                                     <table>
                                         <tr>

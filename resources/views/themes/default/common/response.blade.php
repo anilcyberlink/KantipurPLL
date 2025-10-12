@@ -22,7 +22,6 @@
             @endforeach
         @else
             <script>
-                console.log('test')
                 toastr.{{ $type }}("{{ Session('message') }}");
             </script>
         @endif
