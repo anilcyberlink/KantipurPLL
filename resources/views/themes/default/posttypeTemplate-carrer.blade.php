@@ -57,7 +57,7 @@
             <small class="uk-text-danger">Fields marked with * are required.</small>
             <form action="{{ route('sendmail_resume') }}" method="POST" enctype="multipart/form-data">
 				@csrf
-				<input type="hidden" id="g_recaptcha_response2" name="g_recaptcha_response2"/>
+				<input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
 				<input type="hidden" id="position" name="position" value=""/>
                 <div class="uk-child-width-1-2@m uk-grid uk-margin-top">
                     <div class="uk-margin-small-bottom">
@@ -74,7 +74,7 @@
                     </div>
                     <div class="uk-margin-small-bottom">
                         <label for="year">Experience in Year<span><small class="uk-text-danger">*</small></span></label>
-                        <input class="uk-input" type="text" placeholder="" aria-label="Input" id="year" name="experience" required>
+                        <input class="uk-input" type="number" placeholder="" aria-label="Input" id="year" name="experience" required>
                     </div>
                     <div>
                         <label for="ctc">Current CTC<span><small class="uk-text-danger">*</small></span></label>
@@ -141,7 +141,7 @@
 	grecaptcha.ready(function () {
 		function executeRecaptcha() {
 			grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
-				document.getElementById('g_recaptcha_response2').value = token;
+				document.getElementById('g_recaptcha_response').value = token;
 			});
 		}
 

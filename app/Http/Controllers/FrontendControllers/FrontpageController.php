@@ -26,6 +26,7 @@ use App\Mail\CareerMail;
 use App\Models\Posts\PostTypeModel;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class FrontpageController extends Controller
 {
@@ -83,7 +84,7 @@ class FrontpageController extends Controller
 
     $pos_type = PostTypeModel::where('id',$data->post_type)->first();
     $data_child = PostModel::where('post_parent', $data['id'])->orderBy('post_order','desc')->paginate(12);    
-    $associated_posts = AssociatedPostModel::where('post_id', $data['id'])->get();   
+    $associated_posts = AssociatedPostModel::where('post_id', $data['id'])->paginate(8);   
     $documents = PostDocModel::where('post_id', $data['id'])->orderBy('ordering','desc')->get();
     $related_posts =PostModel::where('post_type',$data->post_type)->where('id', '!=', $data->id)->orderBy('id','asc')->paginate(6);
     $multiphotos = $data->images()->orderBy('created_at','desc')->paginate(6);
@@ -182,89 +183,177 @@ public function sendmail(){
   return redirect()->back()->with('message','Contact message successfully sent.');
 }
 
-public function sendmail_contact(Request $request){
+public function sendmail_contact(Request $request)
+{
   // dd($request->all());
   $g_recaptcha_response = $request->input('g_recaptcha_response');
   $result = $this->getCaptcha($g_recaptcha_response);
-  if ($result->success == true && $result->score > 0.6) {
+  if ($result->success == true) {
+    try{
       $request->validate([
-          'full_name' => 'required',
-          'number' => 'required',
+          'fname' => 'required|string|max:255',
+          'lname' => 'required|string|max:255',
+          'phone' => 'required|string|max:255',
           'email' => 'required|email',
+          'message' => 'nullable|string|max:255',
       ]);
 
       if ($request->isMethod('post')) {
-          $setting = SettingModel::where('id', 1)->first();
-          $create = ContactModel::create([
-              'full_name' => $request->full_name,
-              'email' => $request->email,
-              'number' => $request->number,
-              'subject' => $request->subject,
-              'message' => $request->message,
-              'country' => $request->country,
-          ]);
-          return new ContactMail();
-          $name = $request->full_name;
-          $message = "<p>Thanks for contacting us. One of our team will be in touch with you soon.</p>";
-          return view('themes.default.inquiry-success', compact('message', 'name'));
+        ContactModel::create([
+          'full_name' => $request->fname,
+          'email' => $request->email,
+          'number' => $request->phone,
+          'subject' => $request->subject,
+          'message' => $request->message,
+          'country' => $request->lname,
+        ]);
+        return new ContactMail();
+          // Mail::to($request->email)->send(new ContactMail());
+        $name = $request->fname. ' ' . $request->lname;
+        $message = "<p>Thank you for contacting us. One of our team will be in touch with you soon.</p>";
+        return view('themes.default.inquiry-success', compact('message', 'name'));
       }
+    }catch(ValidationException $e){
+        return redirect()->back()->with([
+            'error' => true,
+            'message' => $e->validator->errors()->all()
+        ]);
+    }catch(Exception $e){
+        return redirect()->back()->with([
+            'error' => true,
+            'message' => app()->isLocal() ? $e->getMessage() : 'Something went wrong. Please try again.'
+        ]);
+    }
   } else {
-      return back()->with('error', 'You are a robot');
+      return redirect()->back()->with([
+          'error' => true,
+          'message' => 'You are Robot.'
+      ]);
   }
 }
 public function sendmail_resume(Request $request)
 {
-  try{
-    $g_recaptcha_response = $request->input('g_recaptcha_response2');
-    $result = $this->getCaptcha($g_recaptcha_response);
+  // dd('test',$request->all());
+  $g_recaptcha_response = $request->input('g_recaptcha_response');
+  $result = $this->getCaptcha($g_recaptcha_response);
+  if($result->success == true){
+      try{
+          $request->validate([
+            'position' => 'required|exists:cl_posts,id',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'experience' => 'required|numeric|min:0',
+            'ctc' => 'required|string',
+            'organization' => 'required|string|max:255',
+            'cv' => 'required|mimes:doc,docx,pdf|max:2048',
+            'cover' => 'required|mimes:doc,docx,pdf|max:2048'
+          ]);
+          
+          $position = PostModel::where('id',$request->position)->first();
+          $cvFile = $request->file('cv');
+          $cvName = time() . '-' . $cvFile->getClientOriginalName();
+          $cvFile->move(public_path('uploads/cv'), $cvName);
 
-    if ($result->success == true) {
-      // dd($request->all());
-        $validated = $request->validate([
-          'position' => 'required|exists:posts,id',
-          'name' => 'required|string|max:255',
-          'phone' => 'required|string|max:20',
-          'email' => 'required|email|max:255',
-          'experience' => 'required|numeric|min:0',
-          'ctc' => 'required|string',
-          'organization' => 'required|string|max:255',
-          'cv' => 'required|mimes:doc,docx,pdf|max:2048',
-          'cover' => 'required|mimes:doc,docx,pdf|max:2048'
-        ]);
+          $coverFile = $request->file('cover');
+          $coverName = time() . '-' . $coverFile->getClientOriginalName();
+          $coverFile->move(public_path('uploads/coverletter'), $coverName);
+          $create = CareerModel::create([
+              'fname'    => $request->name,
+              'lname'    => $request->last_name,
+              'email'    => $request->email,
+              'number'   => $request->phone,
+              'message'  => $request->experience,
+              'cv'       => $cvName,
+              'cover'    => $coverName,
+              'subject'  => $request->ctc,
+              'country'  => $request->organization,
+              'position' => $position->post_title,
+          ]);
+          return new CareerMail();
+          // Mail::to($request->email)->send(new CareerMail());
+          $name = $request->name;
+          $message = "<p>Thank you for applying. One of our team will be in touch with you soon.</p>";
 
-        $cvFile = $request->file('cv');
-        $cvName = time() . '-' . $cvFile->getClientOriginalName();
-        $cvFile->move(public_path('uploads/cv'), $cvName);
+          return view('themes.default.inquiry-success', compact('message', 'name'));
 
-        $coverFile = $request->file('cover');
-        $coverName = time() . '-' . $coverFile->getClientOriginalName();
-        $coverFile->move(public_path('uploads/coverletter'), $coverName);
-        $create = CareerModel::create([
-            'fname'    => $request->name,
-            'lname'    => $request->last_name,
-            'email'    => $request->email,
-            'number'   => $request->phone,
-            'message'  => $request->experience,
-            'cv'       => $cvName,
-            'cover'    => $coverName,
-            'subject'  => $request->ctc,
-            'country'  => $request->organization,
-            'position' => $request->position,
-        ]);
-        // return new CareerMail();
-        $name = $request->name;
-        $message = "<p>Thanks for applying. One of our team will be in touch with you soon.</p>";
-
-        return view('themes.default.inquiry-success', compact('message', 'name'));
-    } else {
-        return back()->with(['error'=> true,
-        'message'=>'Please try again']);
-    }
-  }catch(Exception $e){
-    return back()->with(['error'=> true,
-        'message'=> $e->getMessage() ]);
+          // return redirect('/')->with([
+          //     'success' => true,
+          //     'message' => 'Quotation Sent Successfully. One of our member will contact you soon.'
+          // ]);
+      }catch(ValidationException $e){
+          return redirect()->back()->with([
+              'error' => true,
+              'message' => $e->validator->errors()->all()
+          ]);
+      }catch(Exception $e){
+          return redirect()->back()->with([
+              'error' => true,
+              'message' => app()->isLocal() ? $e->getMessage() : 'Something went wrong. Please try again.'
+          ]);
+      }
+  } else {
+      return redirect()->back()->with([
+          'error' => true,
+          'message' => 'You are Robot.'
+      ]);
   }
 }
+
+// public function sendmail_resume(Request $request)
+// {
+//   try{
+//     $g_recaptcha_response = $request->input('g_recaptcha_response2');
+//     $result = $this->getCaptcha($g_recaptcha_response);
+
+//     if ($result->success == true) {
+//       // dd($request->all());
+//         $validated = $request->validate([
+//           'position' => 'required|exists:posts,id',
+//           'name' => 'required|string|max:255',
+//           'phone' => 'required|string|max:20',
+//           'email' => 'required|email|max:255',
+//           'experience' => 'required|numeric|min:0',
+//           'ctc' => 'required|string',
+//           'organization' => 'required|string|max:255',
+//           'cv' => 'required|mimes:doc,docx,pdf|max:2048',
+//           'cover' => 'required|mimes:doc,docx,pdf|max:2048'
+//         ]);
+
+//         $cvFile = $request->file('cv');
+//         $cvName = time() . '-' . $cvFile->getClientOriginalName();
+//         $cvFile->move(public_path('uploads/cv'), $cvName);
+
+//         $coverFile = $request->file('cover');
+//         $coverName = time() . '-' . $coverFile->getClientOriginalName();
+//         $coverFile->move(public_path('uploads/coverletter'), $coverName);
+//         $create = CareerModel::create([
+//             'fname'    => $request->name,
+//             'lname'    => $request->last_name,
+//             'email'    => $request->email,
+//             'number'   => $request->phone,
+//             'message'  => $request->experience,
+//             'cv'       => $cvName,
+//             'cover'    => $coverName,
+//             'subject'  => $request->ctc,
+//             'country'  => $request->organization,
+//             'position' => $request->position,
+//         ]);
+//         // return new CareerMail();
+//         $name = $request->name;
+//         $message = "<p>Thanks for applying. One of our team will be in touch with you soon.</p>";
+
+//         return view('themes.default.inquiry-success', compact('message', 'name'));
+//     } else {
+//         return back()->with(['error'=> true,
+//         'message'=>'Please try again']);
+//     }
+//   }catch(Exception $e){
+//     return back()->with(['error'=> true,
+//         'message'=> $e->getMessage() ]);
+//   }
+// }
+
 
 private function getCaptcha($Secretkey){
   $secret = env('SECRET_KEY');

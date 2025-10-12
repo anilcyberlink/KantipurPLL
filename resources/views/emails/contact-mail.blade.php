@@ -189,7 +189,7 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <h1>Thanks for contacting with us!</h1>
+                                    <h1>Thank you for contacting us!</h1>
                                     <br/>
                                     Your registered email-id is {{$request->email}} , We will contact you soon.
                                     <br/>

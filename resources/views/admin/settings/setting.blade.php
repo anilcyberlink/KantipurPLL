@@ -33,6 +33,15 @@
                       </div>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="inputStandard" class="col-lg-3 control-label">Factory</label>
+                    <div class="col-lg-8">
+                      <div class="bs-component">
+                            <input type="text" class="form-control" id="" name="address2" value="{{$data->address2}}" />
+                                            
+                      </div>
+                    </div>
+                  </div>
 
 
 

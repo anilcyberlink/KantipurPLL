@@ -13,10 +13,9 @@
                         <thead>
                             <tr class="bg-light">
                                 <th>SN</th>
-                                <th>Full Name</th>
-                                <th>Contact Details</th>
+                                <th>Applicant Details</th>
                                 <th>Position</th>
-                                <th>Message</th>
+                                <th>Career Details</th>
                                 <th>CV</th>
                                 <th>Cover Letter</th>
                                 <th class="text-left">Action</th>
@@ -29,14 +28,15 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>
                                             {{ ucfirst($row->fname) }} {{ ucfirst($row->lname) }}<br>
-                                            {{ $row->created_at->format('d M Y') }}<br>
-                                            @if ($row->country)
-                                                Country: {{ $row->country }}
-                                            @endif
+                                            Phone : {{ $row->number}}<br>
+                                            Email : {{ $row->email }} <br>
+                                            {{ $row->created_at->format('d M Y') }}
                                         </td>
-                                        <td>{{ $row->email }} <br> {{ $row->number }}</td>
                                         <td>{{ $row->position }}</td>
-                                        <td><textarea readonly>{!! $row->message !!}</textarea></td>
+                                        <td>Exp: {!! $row->message !!} year<br>
+                                            Ctc: {{ $row->subject }}<br>
+                                            Org: {{ $row->country }}
+                                        </td>
                                         <td>
                                             @if($row->cv)
                                                 <a href="{{ asset('uploads/cv/' . $row->cv) }}" target="_blank">📝 View CV</a>

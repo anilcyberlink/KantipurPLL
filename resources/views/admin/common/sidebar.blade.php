@@ -36,6 +36,7 @@
             @if (checkAuth(2))
                 <li>
                     @if (Request::segment(2) == 'product' ||
+                            Request::segment(3) == 'product' ||
                             Request::segment(2) == 'about' ||
                             Request::segment(3) == 'about' ||
                             Request::segment(2) == 'blog' ||

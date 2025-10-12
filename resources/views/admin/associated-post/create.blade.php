@@ -23,14 +23,16 @@
           </div>
         </div>
       </div> 
-       {{-- <div class="form-group">
-        <label for="title" class="col-lg-3 control-label">Sub Title</label>
-        <div class="col-lg-8">
-          <div class="bs-component">
-            <input type="text" id="title" name="sub_title" class="form-control" />
-          </div>
-        </div>
-      </div>    --}}
+        @if (Request::segment(3)== 'product')
+          <!-- <div class="form-group"> -->
+            <label for="title" class="col-lg-3 control-label">Brand Name</label>
+            <div class="col-lg-8">
+              <div class="bs-component">
+                <input type="text" id="title" name="sub_title" class="form-control" />
+              </div>
+            </div>
+          <!-- </div> -->
+        @endif
 
     <div class="form-group">
      <label for="inputStandard" class="col-lg-3 control-label">Brief</label>
@@ -80,18 +82,20 @@
       </div>
     </div>  --}}
 
-    {{-- <div class="form-group">
-     <label for="inputStandard" class="col-lg-3 control-label">Thumbnail</label>
-     <div class="col-lg-8">
-      <div class="bs-component">                       
-        <div class="bs-component">
-          <div id="xedit-demo">
-         <input type="file" name="thumbnail" />
-       </div>
+    @if (Request::segment(3)== 'product')
+      <div class="form-group">
+      <label for="inputStandard" class="col-lg-3 control-label">Thumbnail</label>
+      <div class="col-lg-8">
+        <div class="bs-component">                       
+          <div class="bs-component">
+            <div id="xedit-demo">
+          <input type="file" name="thumbnail" />
+        </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>  --}}
+  @endif
 
   <div class="form-group">
     <label class="col-lg-3 control-label" for=""> </label>

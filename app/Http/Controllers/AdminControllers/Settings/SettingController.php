@@ -33,6 +33,7 @@ class SettingController extends Controller
         $data->email_secondary = $request->email_secondary;
         $data->website = $request->website;       
         $data->address = $request->address;       
+        $data->address2 = $request->address2;       
         $data->facebook_link = $request->facebook_link;
         $data->linkedin_link = $request->linkedin_link;  
         $data->youtube_link = $request->youtube_link;      
