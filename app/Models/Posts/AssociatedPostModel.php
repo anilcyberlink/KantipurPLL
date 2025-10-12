@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class AssociatedPostModel extends Model
 {
     protected $table = 'cl_associated_posts';
-    protected $fillable = ['post_id','title','sub_title','brief','thumbnail','icon','ordering','uri','page_key'];
+    protected $fillable = ['post_id','title','sub_title','brief','composition','purpose','information','thumbnail','icon','ordering','uri','page_key'];
 }

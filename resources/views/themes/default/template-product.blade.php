@@ -69,14 +69,14 @@
                         <!-- product card -->
                         @foreach ($associated_posts as $row)
                             <div class="uk-margin-bottom">
-                                <a href="product-detail.php">
+                                <a href="{{ route('page.product_detail',$row->uri) }}">
                                     <div class="product-img uk-inline-clip uk-transition-toggle" tabindex="0">
                                         <img class="uk-transition-scale-up uk-transition-opaque" src="{{$row->thumbnail ? asset('uploads/medium/'.$row->thumbnail) : asset('themes-assets/img/product/1.png')}}" height="250" width="250" loading="lazy" alt="">
                                     </div>
                                 </a>
                                 <div class="product-name uk-padding-small">
                                     <span>{{ $row->sub_title }}</span>
-                                    <a href="product-detail.php">
+                                    <a href="{{ route('page.product_detail',$row->uri) }}">
                                         <h3 class="uk-margin-remove">{{ $row->title }}</h3>
                                     </a>
                                 </div>

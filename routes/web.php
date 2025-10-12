@@ -21,6 +21,7 @@ Route::redirect('/dashboard', '/admin/dashboard', 301);
 Route::get('banners', 'FrontendControllers\FrontpageController@banners');
 
 // Normal Pages
+Route::get('product/{uri}', 'FrontendControllers\FrontpageController@product_detail')->name('page.product_detail');
 Route::get('{uri}.html', 'FrontendControllers\FrontpageController@pagedetail')->name('page.pagedetail');
 Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@posttype')->name('page.posttype');
 

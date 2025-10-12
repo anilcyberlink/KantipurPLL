@@ -174,8 +174,11 @@ class AssociatedPostController extends Controller
       }    
 
       $data->title = $request->title;
-       $data->sub_title = $request->sub_title;
+      $data->sub_title = $request->sub_title;
       $data->brief = $request->brief;
+      $data->composition = $request->composition;
+      $data->purpose = $request->purpose;
+      $data->information = $request->information;
       $data->ordering = $request->ordering;
       $data->icon = $request->icon;
       if($data->save()){
