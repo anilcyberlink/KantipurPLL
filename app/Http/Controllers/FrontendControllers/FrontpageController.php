@@ -93,6 +93,15 @@ class FrontpageController extends Controller
     return view('themes.default.'.$data['template'].'', compact('data','data_child','associated_posts','documents','pos_type','related_posts','multiphotos'));   
   }
 
+  public function product_detail($uri)
+  {
+    $data = AssociatedPostModel::where('uri', $uri)->first();
+    $post = PostModel::where('id', $data->post_id)->with('associatePosts')->first();
+    $related = AssociatedPostModel::where('post_id', $post->id)->where('id', '!=', $data->id)->get();
+    // dd('test',$data,$post);
+    return view('themes.default.productdetail',compact('data','post','related'));
+  }
+
 public function pagedetail_child($parenturi,$uri){
     $data = PostModel::where('uri',$uri)->orWhere('page_key',$uri)->first();
    
