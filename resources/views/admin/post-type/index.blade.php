@@ -1,11 +1,11 @@
 @extends('admin.master')
 @section('title', 'Post Type')
 @section('breadcrumb')
+<!-- <a href="{{ route('type.posttype.create', Request::segment(2)) }}" class="btn btn-primary btn-sm">Create</a> -->
 @endsection
 @section('content')
 	<div class="tray tray-center" style="">
 		<div class="panel">
-			<!-- <a href="{{ route('type.posttype.create', Request::segment(2)) }}" class="btn btn-primary btn-sm">Create</a> -->
 			<div class="panel-body ph20">
 				<div class="tab-content">
 					<div id="users" class="tab-pane active">
