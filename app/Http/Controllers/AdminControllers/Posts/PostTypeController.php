@@ -202,6 +202,7 @@ class PostTypeController extends Controller
         $data->uid = $request->uid;
         $data->ordering = $request->ordering;
         $data->is_menu = $request->is_menu;        
+        $data->is_footer_menu = $request->is_footer_menu;        
         $data->save();
         return redirect()->back()->with('message','Update Successful.');
     }

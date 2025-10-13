@@ -64,14 +64,14 @@
                                     Post Types
                                 </a>
                             </li>
-                            @if (Auth::id() == 1)
+                            <!-- @if (Auth::id() == 1)
                                 <li>
                                     <a href="{{ url('admin/postcategory') }}">
                                         <span class="fa fa-arrows"></span>
                                         Post Categories
                                     </a>
                                 </li>
-                            @endif
+                            @endif -->
                         @endif
                         <!-- Post Type List -->
                         @if ($posttype)

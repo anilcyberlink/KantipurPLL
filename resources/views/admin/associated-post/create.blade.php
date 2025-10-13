@@ -18,7 +18,7 @@
         <div class="panel-body">
           <input type="hidden" name="post_id" value="{{Request::segment(4)}}" />
           <div class="form-group">
-            <label for="title" class="col-lg-3 control-label">Title</label>
+            <label for="title" class="col-lg-2 control-label">Title</label>
             <div class="col-lg-8">
               <div class="bs-component">
                 <input type="text" id="title" name="title" class="form-control" />
@@ -28,7 +28,7 @@
           </div>
           @if (Request::segment(3) == 'product')
             <div class="form-group">
-              <label for="title" class="col-lg-3 control-label">Brand Name</label>
+              <label for="title" class="col-lg-2 control-label">Brand Name</label>
               <div class="col-lg-8">
                 <div class="bs-component">
                   <input type="text" id="title" name="sub_title" class="form-control" />
@@ -37,7 +37,7 @@
             </div>
 
             <div class="form-group">
-              <label for="composition" class="col-lg-3 control-label">Composition</label>
+              <label for="composition" class="col-lg-2 control-label">Composition</label>
               <div class="col-lg-8">
                 <div class="bs-component">
                   <textarea class="form-control my-editor" id="" name="composition" rows="3" autocomplete="off"></textarea>
@@ -47,7 +47,7 @@
           @endif
 
           <div class="form-group">
-            <label for="inputStandard" class="col-lg-3 control-label">Brief</label>
+            <label for="inputStandard" class="col-lg-2 control-label">Brief</label>
             <div class="col-lg-8">
               <div class="bs-component">
                 <div class="bs-component">
@@ -58,7 +58,7 @@
           </div>
 
           <div class="form-group">
-            <label for="title" class="col-lg-3 control-label">Ordering</label>
+            <label for="title" class="col-lg-2 control-label">Ordering</label>
             <div class="col-lg-8">
               <div class="bs-component">
                 <input type="text" id="ordering" name="ordering" class="form-control" value="{{$ordering}}" />
@@ -67,7 +67,7 @@
           </div>
 
           {{-- <div class="form-group">
-            <label class="col-lg-3 control-label">Icon</label>
+            <label class="col-lg-2 control-label">Icon</label>
             <div class="col-lg-6">
               <div class="bs-component">
 
@@ -96,7 +96,7 @@
 
           @if (Request::segment(3) == 'product')
             <div class="form-group">
-              <label for="inputStandard" class="col-lg-3 control-label">Purpose</label>
+              <label for="inputStandard" class="col-lg-2 control-label">Purpose</label>
               <div class="col-lg-8">
                 <div class="bs-component">
                   <div class="bs-component">
@@ -107,7 +107,7 @@
             </div>
 
             <div class="form-group">
-              <label for="inputStandard" class="col-lg-3 control-label">Other Info</label>
+              <label for="inputStandard" class="col-lg-2 control-label">Other Info</label>
               <div class="col-lg-8">
                 <div class="bs-component">
                   <div class="bs-component">
@@ -119,7 +119,7 @@
             </div>
 
             <div class="form-group">
-              <label for="inputStandard" class="col-lg-3 control-label">Thumbnail</label>
+              <label for="inputStandard" class="col-lg-2 control-label">Thumbnail</label>
               <div class="col-lg-8">
                 <div class="bs-component">
                   <div class="bs-component">
@@ -133,7 +133,7 @@
           @endif
 
           <div class="form-group">
-            <label class="col-lg-3 control-label" for=""> </label>
+            <label class="col-lg-2 control-label" for=""> </label>
             <div class="col-lg-8">
               <div class="bs-component">
                 <input type="submit" class="btn btn-primary btn-lg" value="Submit" />

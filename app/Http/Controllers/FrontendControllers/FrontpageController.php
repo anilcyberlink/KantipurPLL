@@ -39,14 +39,12 @@ class FrontpageController extends Controller
     $blogs = PostModel::where('post_type','3')->orderBy('created_at','desc')->take(3)->get();
     $gallery = PostTypeModel::where('id','5')->first();
     $galleries = PostModel::where('post_type','5')->orderBy('created_at','asc')->take(4)->get();
-    $partner = PostModel::where('post_type','8')->with('images')->first();
-    $partners = $partner->images()->get();
     $logistic = PostModel::where(['id'=>'17' , 'post_type'=>$about->id])->first();
     $mission = PostModel::where(['id'=>'6' , 'post_type'=>$about->id])->first();
     $vision = PostModel::where(['id'=>'7' , 'post_type'=>$about->id])->first();
     $setting = SettingModel::where('id',1)->first();
     
-    return view('themes.default.frontpage', compact('banners','about','services','service','setting','logistic','mission','vision','blog','blogs','gallery','galleries','partners'));
+    return view('themes.default.frontpage', compact('banners','about','services','service','setting','logistic','mission','vision','blog','blogs','gallery','galleries'));
   }
 
   public function posttype($uri){
