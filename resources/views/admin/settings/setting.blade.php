@@ -173,12 +173,12 @@
               <input type="text" id="" name="facebook_link" class="form-control" placeholder="" value="{{$data->facebook_link}}" />
             </div>              
            </div>
-            <div class="sid_ mb10"> 
+            <!-- <div class="sid_ mb10"> 
           <h4>Linkedin </h4>                   
               <div class="bs-component">
                 <input type="text" id="" name="linkedin_link" class="form-control" placeholder="" value="{{$data->linkedin_link}}" />
               </div>            
-           </div>
+           </div> -->
             <div class="sid_ mb10"> 
           <h4> Instagram </h4>                   
                <div class="bs-component">
@@ -197,12 +197,13 @@
               <input type="text" id="" name="twitter_link" class="form-control" placeholder="" value="{{$data->twitter_link}}" />
             </div>          
            </div>
-             {{-- <div class="sid_ mb10"> 
-          <h4> You Tube</h4>                   
-            <div class="bs-component">
-               <input type="text" id="" name="youtube_link" class="form-control" placeholder="" value="{{$data->youtube_link}}" />
-            </div>              
-           </div> --}}
+
+          <div class="sid_ mb10"> 
+            <h4> You Tube</h4>                   
+              <div class="bs-component">
+                <input type="text" id="" name="youtube_link" class="form-control" placeholder="" value="{{$data->youtube_link}}" />
+              </div>              
+           </div>
                       
         </div>
         </div>          

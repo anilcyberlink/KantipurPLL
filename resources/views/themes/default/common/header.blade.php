@@ -62,10 +62,10 @@
                     <div class="uk-navbar-right">
                         <div class="uk-flex uk-flex-middle uk-flex-right">
                             <div class="uk-footer-icon">
-                                <a href="" class="uk-icon-button " uk-icon="facebook" style="background: #342F7F!important; border-radius: 10px;"></a>
-                                <a href="" class="uk-icon-button " uk-icon="instagram" style="background: #BA0202!important; border-radius: 10px;"></a>
-                                <a href="" class="uk-icon-button " uk-icon="x" style="background: #000!important;border-radius: 10px;"></a>
-                                <a href="" class="uk-icon-button" uk-icon="youtube" style="background: #D44139!important; border-radius: 10px;"></a>
+                                <a href="{{ $setting->facebook_link }}" class="uk-icon-button " uk-icon="facebook" style="background: #342F7F!important; border-radius: 10px;"></a>
+                                <a href="{{ $setting->instagram_link }}" class="uk-icon-button " uk-icon="instagram" style="background: #BA0202!important; border-radius: 10px;"></a>
+                                <a href="{{ $setting->twitter_link }}" class="uk-icon-button " uk-icon="x" style="background: #000!important;border-radius: 10px;"></a>
+                                <a href="{{ $setting->youtube_link }}" class="uk-icon-button" uk-icon="youtube" style="background: #D44139!important; border-radius: 10px;"></a>
                             </div>
                         </div>
                     </div>
@@ -120,10 +120,10 @@
                                     <div class="uk-offcanvas-footer uk-padding-small uk-padding-remove-top">
                                         <div class="uk-flex uk-flex-middle">
                                             <div class="uk-footer-icon">
-                                                <a href="" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="facebook" style="background: #342F7F!important; border-radius: 10px;"></a>
-                                                <a href="" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="instagram" style="background: #BA0202!important; border-radius: 10px;"></a>
-                                                <a href="" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="x" style="background: #000!important;border-radius: 10px;"></a>
-                                                <a href="" class="uk-icon-button uk-text-white" uk-icon="youtube" style="background: #D44139!important; border-radius: 10px;"></a>
+                                                <a href="{{ $setting->facebook_link }}" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="facebook" style="background: #342F7F!important; border-radius: 10px;"></a>
+                                                <a href="{{ $setting->instagram_link }}" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="instagram" style="background: #BA0202!important; border-radius: 10px;"></a>
+                                                <a href="{{ $setting->twitter_link }}" class="uk-icon-button uk-margin-small-right uk-text-white" uk-icon="x" style="background: #000!important;border-radius: 10px;"></a>
+                                                <a href="{{ $setting->youtube_link }}" class="uk-icon-button uk-text-white" uk-icon="youtube" style="background: #D44139!important; border-radius: 10px;"></a>
                                             </div>
                                         </div>
                                     </div>
