@@ -3,11 +3,11 @@
 
 <!--------------------------- banner section end ------------------------------------->
 <section class="uk-homepage-banner" uk-scrollspy=" cls: uk-animation-slide-bottom-small; target:  h3,h1;  delay: 400; repeat: false;">
-    <div class="uk-position-relative" id="ytbg3" data-youtube="https://youtu.be/LQcKieGJV-M?si=-uBckRG6w6UAxN-D" data-ytbg-mute-button="true" data-ytbg-autoplay="true" data-ytbg-muted="true" data-ytbg-loop="true"></div>
+    <div class="uk-position-relative" id="ytbg3" data-youtube="{{ $banners->link }}" data-ytbg-mute-button="true" data-ytbg-autoplay="true" data-ytbg-muted="true" data-ytbg-loop="true"></div>
     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-column uk-flex-right">
         <div class=" uk-width-1-1 uk-width-2-3@l  uk-margin-large-top">
-            <h3 class="uk-margin-remove uk-border-white">human - animal compasion</h3>
-            <h1 class="uk-margin-small-top uk-margin-large-bottom">The bond between humans and animals is a deep, unspoken connection rooted in trust, love, and mutual understanding.</h1>
+            <h3 class="uk-margin-remove uk-border-white">{{ $banners->title }}</h3>
+            <h1 class="uk-margin-small-top uk-margin-large-bottom">{{ $banners->content }}</h1>
         </div>
     </div>
 </section>
@@ -19,7 +19,7 @@
         <div class="uk-grid">
             <div class="uk-width-1-3@m" uk-scrollspy=" cls: uk-animation-slide-bottom-small; target:  div;  delay: 400; repeat: false;">
                 <div>
-                    <img src="assets/img/about.webp" class="uk-about-img" loading="lazy" alt="about">
+                    <img src="{{$about->banner ? asset('uploads/medium/'.$about->banner) : asset('themes-assets/img/about.webp')}}" class="uk-about-img" loading="lazy" alt="about">
                     <div class="uk-circle-section">
                         <div class="uk-circle-inner-section">
                             <p>12+ <br> Years</p>
@@ -30,10 +30,10 @@
             <div class="uk-width-2-3@m" uk-scrollspy=" cls: uk-animation-slide-bottom-small; target:  div;  delay: 200; repeat: false;">
                 <div>
                     <h3 class=" uk-margin-small-bottom uk-text-secondary uk-border-secondary">About us</h3>
-                    <h2 class="uk-margin-remove-top uk-text-primary">Welcome to Kantipur <br> Pharmaceuticals Lab Limited.</h2>
+                    <h2 class="uk-margin-remove-top uk-text-primary">{!! $about->caption !!}</h2>
                     <div class="uk-bg-light border-rounded uk-padding-small p-26">
-                        <p>KPL is driven by a singular purpose: “Caring and Curing Animal Health with passion and Quality”. At KPL, we are more than just a leader in veterinary pharmaceuticals—we are a dedicated partner in the health and well-being of animals. KPL and Team aim to provide innovative, high-quality solutions that support the care of pets, livestock, and wildlife, ensuring they live healthier, happier lives. With a commitment to sustainability, ethical practices, and continuous improvement, we strive to make a positive impact on both the animals we care for and the communities we serve. Thank you for choosing KPL—we look forward to being a trusted part of your journey to better animal health.</p>
-                        <a href="about.php" class="uk-button uk-primary-btn uk-border-pill">
+                        {!! $about->content !!}
+                        <a href="{{ url('page/' . posttype_url($about->uri)) }}" class="uk-button uk-primary-btn uk-border-pill">
                             <div class="uk-flex uk-flex-middle uk-flex-center" style="gap:10px;">
                                 <span class="uk-btn-text">EXPLORE MORE</span>
                                 <span class="uk-btn-icon">
@@ -44,32 +44,37 @@
                     </div>
                     <div class="uk-child-width-1-3@m uk-grid-small uk-grid uk-margin-top ">
                         <div class="uk-grid uk-grid-collapse uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-margin-bottom">
-                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="assets/img/icon/mission.png" loading="lazy" height="60" width="60" alt=""></div>
+                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="{{asset('themes-assets/img/icon/mission.png')}}" loading="lazy" height="60" width="60" alt=""></div>
                             <div class="uk-width-5-6 uk-width-3-4@m">
-                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">Our mission</h3>
-                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">To support the growth and development of the animal and poultry industries in Nepal.</p>
-                                <a href="mission.php" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
+                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">{{ $mission->post_title }}</h3>
+                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">
+                                    {{ $mission->post_excerpt }}
+                                </p>
+                                <a href="{{ url('page/' . posttype_url($missions->uri)) }}" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
                             </div>
                         </div>
 
                         <div class="uk-grid uk-grid-collapse border-left uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-margin-bottom">
-                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="assets/img/icon/vision.png" loading="lazy" height="60" width="60" alt=""></div>
+                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="{{asset('themes-assets/img/icon/vision.png')}}" loading="lazy" height="60" width="60" alt=""></div>
                             <div class="uk-width-5-6 uk-width-3-4@m">
-                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">Our vision</h3>
-                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">We aspire to be as an industry leader with the goal of contributing to overall advancement of the animal</p>
-                                <a href="mission.php" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
+                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">{{ $vision->post_title }}</h3>
+                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">
+                                    {{ $vision->post_excerpt }}
+                                </p>
+                                <a href="{{ url('page/' . posttype_url($missions->uri)) }}" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
                             </div>
                         </div>
 
                         <div class="uk-grid uk-grid-collapse border-left uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-margin-bottom">
-                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="assets/img/icon/goal.png" loading="lazy" height="60" width="60" alt=""></div>
+                            <div class="uk-width-1-6 uk-width-1-4@m"><img src="{{asset('themes-assets/img/icon/goal.png')}}" loading="lazy" height="60" width="60" alt=""></div>
                             <div class="uk-width-5-6 uk-width-3-4@m">
-                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">Our goals</h3>
-                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">To become the leading veterinary industry in Nepal in the field of Animal Feed Supplements.</p>
-                                <a href="mission.php" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
+                                <h3 class="uk-text-primary uk-text-bold uk-margin-remove">{{ $goal->post_title }}</h3>
+                                <p class="uk-margin-remove-top uk-margin-small-bottom four-line" style="font-size:14px;">
+                                    {{ $goal->post_excerpt }}
+                                </p>
+                                <a href="{{ url('page/' . posttype_url($missions->uri)) }}" class="uk-know-btn"> Know More <span uk-icon="icon:  triangle-right"></span></a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -306,10 +311,10 @@
         <div class="uk-grid">
             <div class="uk-width-2-3@m" uk-scrollspy=" cls: uk-animation-slide-bottom-small; target:  h3,h2;  delay: 400; repeat: false;">
                 <h3 class=" uk-margin-small-bottom uk-text-secondary uk-border-secondary">our blogs</h3>
-                <h2 class="uk-margin-remove-top uk-text-primary">Latest News & Update</h2>
+                <h2 class="uk-margin-remove-top uk-text-primary">{{ $blog->uid }}</h2>
             </div>
             <div class="uk-width-1-3@m  uk-text-left uk-text-right@m uk-visible@m">
-                <a href="blog.php" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
+                <a href="{{ url('page/' . posttype_url($blog->uri)) }}" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
                     <div class="uk-flex uk-flex-middle uk-flex-center" style="gap:10px;">
                         <span class="uk-btn-text">EXPLORE MORE</span>
                         <span class="uk-btn-icon">
@@ -320,147 +325,83 @@
             </div>
         </div>
         <div class="uk-child-width-1-2@m" uk-grid uk-scrollspy=" cls: uk-animation-slide-bottom-small; target: .block;  delay: 400; repeat: false;">
-            <div class="block">
-                <div>
-                    <a href="blog-detail.php" class="uk-blog-section uk-inline-clip uk-transition-toggle" tabindex="0">
-                        <img src="assets/img/blog1.png" class="uk-blog-section-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
-                    </a>
-                </div>
-                <div class="uk-bg-light uk-padding-small uk-margin-top uk-border-bottom">
-                    <div class="uk-flex" style="gap:15px;">
-                        <div class="uk-text-uppercase">
-                            <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
-                            Admin Name
-                        </div>
-                        <div class="uk-text-uppercase">
-                            <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
-                            27 August, 2025
-                        </div>
-                    </div>
-                    <a href="blog-detail.php" class="uk-blog-text">
-                        <h2 class="f-20 uk-margin-remove two-line">Behavior and training animals</h2>
-                    </a>
-                    <p class="uk-margin-remove two-line">What Every Pet Owner Needs to Know Owning a pet is a rewarding experience, but it also comes with important responsibilities Pet Owner Needs to Know Owning a pet is a rewarding experience.</p>
-                    <a href="blog-detail.php" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
-                        <div class="uk-flex uk-flex-middle uk-flex-center" style="gap:10px;">
-                            <span class="uk-btn-text">EXPLORE MORE</span>
-                            <span class="uk-btn-icon">
-                                <i class="fa-solid fa-paw"></i>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="block">
-                <div class="uk-bg-light border-rounded uk-margin-bottom">
-                    <div class="uk-grid uk-grid-small ">
-                        <div class="uk-width-1-3@s">
-                            <a href="blog-detail.php" class="uk-width-1-1  uk-inline-clip uk-transition-toggle" tabindex="0">
-                                <img src="assets/img/blog2.webp" class="uk-blog-small-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+            @foreach($blogs as $row)
+                @if($loop->first)
+                    <div class="block">
+                        <div>
+                            <a href="{{url(geturl($row['uri'],$row['page_key']))}}" class="uk-blog-section uk-inline-clip uk-transition-toggle" tabindex="0">
+                                <img src="{{$row->page_thumbnail ? asset('uploads/medium/'.$row->page_thumbnail) : asset('themes-assets/img/blog1.png')}}" class="uk-blog-section-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="{{ $row->post_title }}">
                             </a>
                         </div>
-                        <div class="uk-width-2-3@s uk-flex uk-flex-column uk-flex-center">
-                            <div class="uk-blog-small-text">
-                                <div class="uk-flex" style="gap:15px;">
+                        <div class="uk-bg-light uk-padding-small uk-margin-top uk-border-bottom">
+                            <div class="uk-flex" style="gap:15px;">
+                                @if ($row->associated_title)
                                     <div class="uk-text-uppercase">
                                         <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
-                                        Admin Name
+                                        {{ $row->associated_title }}
                                     </div>
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
-                                        27 August, 2025
-                                    </div>
+                                @endif
+                                <div class="uk-text-uppercase">
+                                    <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
+                                    {{ $row->created_at->format('d F, Y') }}
                                 </div>
-                                <a href="blog-detail.php" class="uk-blog-text">
-                                    <h2 class="f-18 uk-margin-remove two-line">Behavior and training animals</h2>
-                                </a>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-bg-light border-rounded uk-margin-bottom">
-                    <div class="uk-grid uk-grid-small ">
-                        <div class="uk-width-1-3@s">
-                            <a href="blog-detail.php" class="uk-width-1-1  uk-inline-clip uk-transition-toggle" tabindex="0">
-                                <img src="assets/img/blog3.jpeg" class="uk-blog-small-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <a href="{{url(geturl($row['uri'],$row['page_key']))}}" class="uk-blog-text">
+                                <h2 class="f-20 uk-margin-remove two-line">{{ $row->post_title }}</h2>
+                            </a>
+                            <p class="uk-margin-remove two-line">
+                                {{ $row->post_excerpt }}
+                            </p>
+                            <a href="{{url(geturl($row['uri'],$row['page_key']))}}" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
+                                <div class="uk-flex uk-flex-middle uk-flex-center" style="gap:10px;">
+                                    <span class="uk-btn-text">EXPLORE MORE</span>
+                                    <span class="uk-btn-icon">
+                                        <i class="fa-solid fa-paw"></i>
+                                    </span>
+                                </div>
                             </a>
                         </div>
-                        <div class="uk-width-2-3@s uk-flex uk-flex-column uk-flex-center">
-                            <div class="uk-blog-small-text">
-                                <div class="uk-flex" style="gap:15px;">
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
-                                        Admin Name
-                                    </div>
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
-                                        27 August, 2025
+                    </div>
+                @else
+                    @if ($loop->iteration == 2)
+                        <div class="block">
+                    @endif
+                        <div class="uk-bg-light border-rounded uk-margin-bottom">
+                            <div class="uk-grid uk-grid-small ">
+                                <div class="uk-width-1-3@s">
+                                    <a href="{{url(geturl($row['uri'],$row['page_key']))}}" class="uk-width-1-1  uk-inline-clip uk-transition-toggle" tabindex="0">
+                                        <img src="{{$row->page_thumbnail ? asset('uploads/medium/'.$row->page_thumbnail) : asset('themes-assets/img/blog2.webp')}}" class="uk-blog-small-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="{{ $row->post_title }}">
+                                    </a>
+                                </div>
+                                <div class="uk-width-2-3@s uk-flex uk-flex-column uk-flex-center">
+                                    <div class="uk-blog-small-text">
+                                        <div class="uk-flex" style="gap:15px;">
+                                            @if ($row->associated_title)
+                                                <div class="uk-text-uppercase">
+                                                    <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
+                                                    {{ $row->associated_title }}
+                                                </div>
+                                            @endif
+                                            <div class="uk-text-uppercase">
+                                                <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
+                                                {{ $row->created_at->format('d F, Y') }}
+                                            </div>
+                                        </div>
+                                        <a href="{{url(geturl($row['uri'],$row['page_key']))}}" class="uk-blog-text">
+                                            <h2 class="f-18 uk-margin-remove two-line">{{ $row->post_title }}</h2>
+                                        </a>
                                     </div>
                                 </div>
-                                <a href="blog-detail.php" class="uk-blog-text">
-                                    <h2 class="f-18 uk-margin-remove two-line">Behavior and training animals</h2>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-bg-light border-rounded uk-margin-bottom">
-                    <div class="uk-grid uk-grid-small ">
-                        <div class="uk-width-1-3@s">
-                            <a href="blog-detail.php" class="uk-width-1-1  uk-inline-clip uk-transition-toggle" tabindex="0">
-                                <img src="assets/img/blog4.jpeg" class="uk-blog-small-img uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
-                            </a>
-                        </div>
-                        <div class="uk-width-2-3@s uk-flex uk-flex-column uk-flex-center">
-                            <div class="uk-blog-small-text">
-                                <div class="uk-flex" style="gap:15px;">
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
-                                        Admin Name
-                                    </div>
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
-                                        27 August, 2025
-                                    </div>
-                                </div>
-                                <a href="blog-detail.php" class="uk-blog-text">
-                                    <h2 class="f-18 uk-margin-remove two-line">Behavior and training animals</h2>
-                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="uk-bg-light border-rounded uk-margin-bottom">
-                    <div class="uk-grid  uk-grid-small">
-                        <div class="uk-width-1-3@s">
-                            <a href="blog-detail.php">
-                                <img src="assets/img/blog1.png" class="uk-blog-small-img" loading="lazy" alt="">
-                            </a>
+                    @if($loop->last)
                         </div>
-                        <div class="uk-width-2-3@s uk-flex uk-flex-column uk-flex-center">
-                            <div class="uk-blog-small-text">
-                                <div class="uk-flex" style="gap:15px;">
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-user uk-text-secondary uk-margin-small-right"></i>
-                                        Admin Name
-                                    </div>
-                                    <div class="uk-text-uppercase">
-                                        <i class="fa-solid fa-calendar uk-text-secondary uk-margin-small-right"></i>
-                                        27 August, 2025
-                                    </div>
-                                </div>
-                                <a href="blog-detail.php" class="uk-blog-text">
-                                    <h2 class="f-18 uk-margin-remove two-line">Behavior and training animals Behavior and training animals</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    @endif
+                @endif
+            @endforeach
         </div>
         <div class="uk-hidden@s">
-            <a href="blog.php" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
+            <a href="{{ url('page/' . posttype_url($blog->uri)) }}" class="uk-button uk-primary-btn uk-border-pill uk-margin-top">
                 <div class="uk-flex uk-flex-middle uk-flex-center" style="gap:10px;">
                     <span class="uk-btn-text">EXPLORE MORE</span>
                     <span class="uk-btn-icon">

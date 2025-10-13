@@ -31,20 +31,21 @@ use Illuminate\Validation\ValidationException;
 class FrontpageController extends Controller
 {
 	public function index(){
-    $banners = BannerModel::all();
+    $banners = BannerModel::first();
     $about = PostTypeModel::where('id','1')->first();
+    $missions = PostTypeModel::where('id','9')->first();
+    $mission = PostModel::where(['id'=>'22' , 'post_type'=>9 ])->first();
+    $vision = PostModel::where(['id'=>'23' , 'post_type'=>9 ])->first();
+    $goal = PostModel::where(['id'=>'24' , 'post_type'=>9 ])->first();
+    $blog = PostTypeModel::where('id','3')->first();
+    $blogs = PostModel::where('post_type','3')->orderBy('post_order','asc')->take(5)->get();
+
     $service = PostTypeModel::where('id','2')->first();
     $services = PostModel::where('post_type','2')->take(4)->get();
-    $blog = PostTypeModel::where('id','3')->first();
-    $blogs = PostModel::where('post_type','3')->orderBy('created_at','desc')->take(3)->get();
     $gallery = PostTypeModel::where('id','5')->first();
     $galleries = PostModel::where('post_type','5')->orderBy('created_at','asc')->take(4)->get();
-    $logistic = PostModel::where(['id'=>'17' , 'post_type'=>$about->id])->first();
-    $mission = PostModel::where(['id'=>'6' , 'post_type'=>$about->id])->first();
-    $vision = PostModel::where(['id'=>'7' , 'post_type'=>$about->id])->first();
-    $setting = SettingModel::where('id',1)->first();
-    
-    return view('themes.default.frontpage', compact('banners','about','services','service','setting','logistic','mission','vision','blog','blogs','gallery','galleries'));
+    // dd($banners);
+    return view('themes.default.frontpage', compact('banners','about','missions','mission','vision','goal','blog','blogs'));
   }
 
   public function posttype($uri){

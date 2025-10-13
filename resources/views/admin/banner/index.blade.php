@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('title','Banner')
 @section('breadcrumb')
-     <a href="admin/banner/create" class="btn btn-primary btn-sm">Create</a>
+     <!-- <a href="admin/banner/create" class="btn btn-primary btn-sm">Create</a> -->
 @endsection
 @section('content')
 <div class="tray tray-center" style="height: 647px;">
