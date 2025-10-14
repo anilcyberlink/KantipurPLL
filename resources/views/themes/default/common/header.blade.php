@@ -20,6 +20,38 @@
             opacity: .9 !important;
         }
     </style>
+
+    <!---------------- Fav icon starts --------------------->
+    	<link rel="icon" type="image/x-icon" href="{{asset('assets/favicon/favicon.ico')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon/favicon-96x96.png')}}">
+        <link rel="apple-touch-icon" href="{{asset('assets/favicon/apple-touch-icon.png')}}">
+        <link rel="manifest" href="{{asset('assets/favicon/site.webmanifest')}}">
+    <!---------------- Fav icon stops ----------------------->
+
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6878d1a3bc8a74001956c4fe&product=inline-share-buttons' async='async'></script>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="@yield('title')"/>
+    <meta property="og:url" content="{{url()->current()}}"/>
+    <meta property="og:site_name" content="{{$setting->site_name}}"/>
+    <meta property="og:description" content="@yield('meta_description')"/>
+    @if (trim($__env->yieldContent('thumbnail')))
+	   <meta property="og:image" content="{{ asset('uploads/original/' ) }}/@yield('thumbnail')" />
+	@else
+	   <meta property="og:image" content="{{asset('theme-assets/images/favicon.png')}}" />
+	@endif
+    <meta property="og:image:width" content="1000"/>
+    <meta property="og:image:height" content="600"/>
+    @if (trim($__env->yieldContent('thumbnail')))
+    <meta name="twitter:image" content="{{ asset('uploads/original/' ) }}/@yield('thumbnail')"/>
+    @else
+    <meta property="twitter:image" content="{{ asset('theme-assets/images/logo.png') }}"/>
+    @endif
+    <meta name="twitter:url" content="{{url()->current()}}">
+    <meta name="twitter:title" content="@yield('title')">
+    <meta name="twitter:description" content="@yield('meta_description')">
+    <meta name="twitter:card" content="summary_large_image"/>
+
 </head>
 
 <body>
