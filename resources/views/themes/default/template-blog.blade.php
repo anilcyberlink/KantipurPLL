@@ -42,13 +42,14 @@
                     </p>
                 </div>
                 <div class="uk-margin-bottom">
-                    <h4 class="f-20 uk-text-bold">SHARE THIS:</h4>
-                    <div class="uk-footer-icon">
+                    <h4 class="f-20 uk-text-bold">SHARE THIS: </h4>
+                    <div class="sharethis-inline-share-buttons"></div>
+                    <!-- <div class="uk-footer-icon">
                         <a href="" class="uk-icon-button " uk-icon="facebook"></a>
                         <a href="" class="uk-icon-button " uk-icon="instagram"></a>
                         <a href="" class="uk-icon-button " uk-icon="x"></a>
                         <a href="" class="uk-icon-button" uk-icon="youtube"></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="uk-width-1-3@m block">
