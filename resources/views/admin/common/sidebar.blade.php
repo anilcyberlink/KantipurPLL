@@ -46,6 +46,8 @@
                             Request::segment(2) == 'career' ||
                             Request::segment(3) == 'career' ||
                             Request::segment(2) == 'mission' ||
+                            Request::segment(2) == 'frontpage' ||
+                            Request::segment(3) == 'frontpage' ||
                             Request::segment(2) == 'posttype')
                         <a class="accordion-toggle menu-open" href="avoid:javascript;">
                         @else
