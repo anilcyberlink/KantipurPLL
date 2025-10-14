@@ -66,12 +66,12 @@
                 </td>
                 
               <td>
-                @if ($row->id == 17 || Request::segment(2)== 'product')
+                @if ($row->id == 17 || Request::segment(2)== 'product' || (Request::segment(2)== 'frontpage' && $row->id == 29))
                   <a href="{{url('admin/associated/'.Request::segment(2).'/'.$row->id)}}" title="Associated posts">
                   <i class="fa fa-list-ol"></i>
                   </a>
                 @endif
-              @if ( Request::segment(2)=='gallery' || Request::segment(2)== 'partners')
+              @if ( Request::segment(2)=='gallery'|| (Request::segment(2)== 'frontpage' && $row->id == 28) || Request::segment(2)== 'partners')
                 <a href="{{ route('admin.multiplephoto', $row->id ) }}" title="Photo">
                   <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 </a>
