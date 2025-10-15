@@ -88,7 +88,7 @@
             </div>
           </div> --}}
 
-          {{-- @if($parent_post->count() > 0)
+          @if($parent_post->count() > 0)
           <div class="form-group">
             <label for="inputSelect" class="col-lg-2 control-label">Select Parent</label>
             <div class="col-lg-9">
@@ -127,7 +127,7 @@
               </div>
             </div>
           </div>
-          @endif --}}
+          @endif
 
           <div class="form-group">
             <label class="col-lg-2 control-label" for="textArea3"> Brief </label>

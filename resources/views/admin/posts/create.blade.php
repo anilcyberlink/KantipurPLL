@@ -78,7 +78,7 @@
             </div>
           </div> --}}
 
-          {{-- <div class="form-group">
+          <div class="form-group">
             <label for="inputSelect" class="col-lg-2 control-label">Select Parent</label>
             <div class="col-lg-9">
               <div class="bs-component">
@@ -108,7 +108,7 @@
                 <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
               </div>
             </div>
-          </div> --}}
+          </div>
 
           <div class="form-group">
             <label class="col-lg-2 control-label" for="textArea3"> Brief </label>

@@ -82,12 +82,17 @@ class FrontpageController extends Controller
     }  
 
     $pos_type = PostTypeModel::where('id',$data->post_type)->first();
-    $data_child = PostModel::where('post_parent', $data['id'])->orderBy('post_order','desc')->paginate(12);    
-    $associated_posts = AssociatedPostModel::where('post_id', $data['id'])->paginate(8);   
     $documents = PostDocModel::where('post_id', $data['id'])->orderBy('ordering','desc')->get();
-    $related_posts =PostModel::where('post_type',$data->post_type)->where('id', '!=', $data->id)->orderBy('id','asc')->paginate(6);
+    if($data && $data->post_parent == '0'){
+      $data_child = PostModel::where('post_parent', $data['id'])->with('associatePosts')->orderBy('post_order','asc')->get();
+      $associated_posts = AssociatedPostModel::whereIn('post_id', $data_child->pluck('id'))->paginate(8);   
+    }else{
+      $data_child = PostModel::where('post_type',$data->post_type)->where('post_parent',$data['post_parent'])->with('associatePosts')->orderBy('id','asc')->get();
+      $associated_posts = AssociatedPostModel::where('post_id', $data['id'])->paginate(8);  
+    }
+    $related_posts =PostModel::where('post_type',$data->post_type)->where('id','!=',$data['id'])->orderBy('id','asc')->get();
     $multiphotos = $data->images()->orderBy('created_at','desc')->paginate(6);
-    // dd( $data,$associated_posts);
+    // dd( $data,$data_child,$related_posts);
 
     return view('themes.default.'.$data['template'].'', compact('data','data_child','associated_posts','documents','pos_type','related_posts','multiphotos'));   
   }
