@@ -22,7 +22,7 @@
             <div class="uk-width-2-3@m block">
                 <div uk-lightbox>
                     <a class="uk-inline uk-blog-detail-img uk-inline-clip uk-transition-toggle" tabindex="0" href="{{asset('themes-assets/img/blog1.png')}}">
-                        <img src="{{$data->banner ? asset('uploads/medium/'.$data->banner) : asset('themes-assets/img/blog1.png')}}" class=" uk-transition-scale-up uk-transition-opaque" loading="lazy" width="1800" height="1200" alt="{{$data->post_title}}">
+                        <img src="{{$data->page_thumbnail ? asset('uploads/medium/'.$data->page_thumbnail) : asset('themes-assets/img/blog1.png')}}" class=" uk-transition-scale-up uk-transition-opaque" loading="lazy" width="1800" height="1200" alt="{{$data->post_title}}">
                     </a>
                 </div>
                 <div>

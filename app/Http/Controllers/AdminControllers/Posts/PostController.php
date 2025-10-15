@@ -259,7 +259,7 @@ class PostController extends Controller
       $data['thumbnail'] = $thumbnail_name;
       $data['page_thumbnail'] = $page_thumbnail_name;
       $data['icon'] = $icon_name;
-      $data['post_parent'] = $$request->post_parent ?? 0;
+      $data['post_parent'] = $request->post_parent ?? 0;
       $data['banner'] = $banner_name;     
       $isChecked = $request->has('show_in_home');       
       $data['show_in_home'] = ($isChecked)?'1':'0';
